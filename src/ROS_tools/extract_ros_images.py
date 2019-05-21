@@ -71,12 +71,13 @@ if __name__ == "__main__":
                 rostime_nsec = msg.header.stamp.nsecs
             else:
                 if flag == False:
-                    print "This msg has no header !!! So we will use bag timestamp as image names !!!"
+                    ROS_ERROR("This msg has no header !!! So we will use bag timestamp as image names !!! This may incur time skewing!!!")
                     flag = True
                 rostime_sec = stamp.secs
                 rostime_nsec = stamp.nsecs
 
-            stamp = str(rostime_sec) + "." + str(rostime_nsec)
+            stamp = str(rostime_sec).zfill(10)+ "." + str(rostime_nsec).zfill(9)
+            print "stamp is", stamp
 
             if topic in topic_list:
                 # pass
